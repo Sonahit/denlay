@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "outDir": "dist",
+    "module": "commonjs",
+    "removeComments": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "typeRoots": ["augmentation.d.ts", "node_modules/@types"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@utils/*": ["utils/*"],
+      "@database/*": ["database/*"],
+      "@enums/*": ["enums/*"],
+      "@exceptions/*": ["exceptions/*"],
+      "@schemas/*": ["schemas/*"],
+      "@services/*": ["services/*"],
+      "@plugins/*": ["plugins/*"],
+    }
+  }
+}
