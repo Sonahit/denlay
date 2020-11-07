@@ -1,13 +1,52 @@
 import { FastifyRoute } from '../../types';
+import { createItemsSchema, deleteItemSchema, getInventorySchema, placeItemSchema } from './schemas';
 
-const noop: FastifyRoute = (fastify) => {
-  return fastify;
-};
+export const getInventory: FastifyRoute = (fastify) =>
+  fastify.get(
+    '/inventory',
+    {
+      schema: getInventorySchema,
+      preValidation: [(fastify as any).authenticate],
+    },
+    async (req, res) => {
+      res.send('');
+    }
+  );
 
-export const getInventory: FastifyRoute = noop;
+export const createItems: FastifyRoute = (fastify) =>
+  fastify.post(
+    '/inventory',
+    {
+      schema: createItemsSchema,
+      preValidation: [(fastify as any).authenticate],
+    },
+    async (req, res) => {
+      res.send('');
+    }
+  );
 
-export const createItem: FastifyRoute = noop;
+export const placeItem: FastifyRoute = (fastify) =>
+  fastify.post(
+    '/inventory/:itemId',
+    {
+      schema: placeItemSchema,
+      preValidation: [(fastify as any).authenticate],
+    },
+    async (req, res) => {
+      res.send('');
+    }
+  );
 
-export const putItem: FastifyRoute = noop;
+export const deleteItem: FastifyRoute = (fastify) =>
+  fastify.delete(
+    '/inventory/:itemId',
+    {
+      schema: deleteItemSchema,
+      preValidation: [(fastify as any).authenticate],
+    },
+    async (req, res) => {
+      res.send('');
+    }
+  );
 
-export const deleteItem: FastifyRoute = noop;
+export default [getInventory, createItems, placeItem, deleteItem];

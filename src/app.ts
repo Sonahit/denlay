@@ -8,6 +8,7 @@ import swagger from '@plugins/swagger';
 import routes from './routes';
 import errorHandler from '@plugins/error-handler';
 import payloadHandler from '@plugins/payload-handler';
+import checkAuth from 'internal/utils/checkAuth';
 
 const fastify = _fastify({
   ignoreTrailingSlash: true,
@@ -30,9 +31,42 @@ fastify.register(cors);
 fastify.register(fastifySwagger, {
   routePrefix: '/docs',
   exposeRoute: true,
+  swagger: {
+    definitions: {
+      Inv: {
+        type: 'object',
+        properties: {
+          id: { type: 'number' },
+          userId: { type: 'number' },
+          cells: { type: 'number' },
+          items: { type: 'array', items: { $ref: '#/definitions/InvItem' } },
+        },
+      },
+      InvItem: {
+        type: 'object',
+        required: ['name'],
+        properties: {
+          name: { type: 'string' },
+          description: { type: 'string' },
+          count: { type: 'number' },
+          cell: { type: 'number' },
+          inventoryId: { type: 'number' },
+        },
+      },
+    },
+    securityDefinitions: {
+      apiKey: {
+        type: 'apiKey',
+        name: 'jwt',
+        in: 'header',
+      },
+    },
+  },
 });
 
 fastify.register(swagger);
+
+fastify.decorate('authenticate', checkAuth);
 
 routes(fastify);
 

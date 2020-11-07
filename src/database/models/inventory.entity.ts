@@ -19,6 +19,7 @@ export class Inventory implements BaseEntity<InventoryDto> {
 
   @OneToOne(() => User, (u) => u.inventory, {
     lazy: true,
+    persistence: false,
   })
   @JoinColumn()
   user!: Promise<User>;
@@ -28,7 +29,11 @@ export class Inventory implements BaseEntity<InventoryDto> {
   })
   items!: Promise<InventoryItem[]>;
 
-  toDto() {
-    return {};
+  toDto(): InventoryDto {
+    return {
+      id: this.id,
+      cells: this.cells,
+      userId: this.userId,
+    };
   }
 }

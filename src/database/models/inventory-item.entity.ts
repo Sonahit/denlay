@@ -1,9 +1,9 @@
 import { BaseEntity } from '../../types';
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from './user.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { InventoryItemDto } from '@database/dto/inventory-item.dto';
 import { Inventory } from './inventory.entity';
 
+@Unique('inventory_name_unique_key', ['inventoryId', 'name'])
 @Entity()
 export class InventoryItem implements BaseEntity<InventoryItemDto> {
   @PrimaryGeneratedColumn()
@@ -31,7 +31,14 @@ export class InventoryItem implements BaseEntity<InventoryItemDto> {
   })
   inventory!: Promise<Inventory>;
 
-  toDto() {
-    return {};
+  toDto(): InventoryItemDto {
+    return {
+      id: this.id,
+      name: this.name,
+      inventoryId: this.inventoryId,
+      cell: this.cell,
+      count: this.count,
+      description: this.description,
+    };
   }
 }

@@ -2,20 +2,24 @@ import app from '../src/app';
 import { createConnection, getConnection, getRepository } from 'typeorm';
 import { User } from '../src/database/models/user.entity';
 import { sha256 } from '../src/utils/hash';
+import { plainToClass } from 'class-transformer';
 import * as faker from 'faker';
+import * as service from '../src/routes/inventory/service';
+import { InventoryItem } from '@database/models/inventory-item.entity';
 
-const testUser = { email: faker.internet.email(), password: faker.internet.password(10) };
+const testUser = plainToClass(User, { email: faker.internet.email(), password: faker.internet.password(10) });
 
 beforeAll(async () => {
   await createConnection();
-
+  await getConnection().synchronize();
   const userRep = getRepository(User);
-  const user = await userRep.findOne({ where: { email: testUser.email } });
+  let user = await userRep.findOne({ where: { email: testUser.email } });
   if (!user) {
-    await userRep.save({ email: testUser.email, password: sha256(testUser.password) });
+    user = await userRep.save({ email: testUser.email, password: sha256(testUser.password) });
   } else {
-    await userRep.save({ ...user, email: testUser.email, password: sha256(testUser.password) });
+    user = await userRep.save({ ...user, email: testUser.email, password: sha256(testUser.password) });
   }
+  testUser.id = user.id;
 });
 
 afterAll(async () => {
@@ -23,10 +27,68 @@ afterAll(async () => {
   await app.close();
 });
 
-describe('Inventory', () => {
-  it('should get user inventory', async () => {});
+describe('Inventory service', () => {
+  it('should get user inventory even if doesnt exist', async () => {
+    const inv = await service.getInventory(testUser);
 
-  it.todo('should create item in user inventory');
+    expect(inv).toBeDefined();
+  });
 
-  it.todo('should delete item in user inventory');
+  it("should create item in user's inventory", async () => {
+    const inv = await service.getInventory(testUser);
+
+    expect(inv).toBeDefined();
+
+    const item = await service.createItem(inv, {
+      cell: 1,
+      count: 1,
+      description: '',
+      name: faker.random.words(5),
+    });
+
+    expect(item).toBeDefined();
+    expect(item.count).toBe(1);
+  });
+
+  it("should place item in user's inventory", async () => {
+    const inv = await service.getInventory(testUser);
+
+    expect(inv).toBeDefined();
+
+    const item = await service.createItem(inv, {
+      cell: 1,
+      count: 1,
+      description: '',
+      name: faker.random.words(5),
+    });
+
+    expect(item).toBeDefined();
+    expect(item.count).toBe(1);
+    const cell = 5;
+    await service.placeItem(inv, { id: item.id, cell });
+
+    const rep = getRepository(InventoryItem);
+    const it = (await rep.findOne(item.id)) as InventoryItem;
+
+    expect(it).toBeDefined();
+    expect(it.cell).toBe(cell);
+  });
+
+  it("should delete item in user's inventory", async () => {
+    const inv = await service.getInventory(testUser);
+
+    expect(inv).toBeDefined();
+
+    const item = await service.createItem(inv, {
+      cell: 1,
+      count: 1,
+      description: '',
+      name: faker.random.words(5),
+    });
+
+    expect(item).toBeDefined();
+    expect(item.count).toBe(1);
+
+    expect(service.deleteItem(item)).resolves.toBeTruthy();
+  });
 });
