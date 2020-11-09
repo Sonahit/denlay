@@ -4,7 +4,7 @@ import { CheckRequest } from 'internal/clients/requests/CheckRequest';
 import { CheckResponse } from 'internal/clients/responses/CheckResponse';
 import { auth } from '../clients/auth';
 import { getRepository } from 'typeorm';
-import { User } from 'database/models/user.entity';
+import { User } from '../../database/models/user.entity';
 
 export default async (req: FastifyRequest) => {
   const { response = false } = (await auth.send<CheckRequest>({

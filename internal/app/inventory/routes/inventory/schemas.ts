@@ -58,11 +58,27 @@ export const placeItemSchema: FastifySchema = {
   response: {
     '2xx': {
       type: 'object',
-      properties: {
-        data: {
-          $ref: '#/definitions/InvItem',
+      oneOf: [
+        {
+          type: 'object',
+          properties: {
+            data: {
+              $ref: '#/definitions/InvItem',
+            },
+          },
         },
-      },
+        {
+          type: 'object',
+          properties: {
+            data: {
+              type: 'array',
+              items: {
+                $ref: '#/definitions/InvItem',
+              },
+            },
+          },
+        },
+      ],
     },
   },
   params: {

@@ -1,9 +1,9 @@
 import { BaseEntity } from '~pkg/types';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
-import { InventoryItemDto } from '..//dto/inventory-item.dto';
+import { InventoryItemDto } from '../dto/inventory-item.dto';
 import { Inventory } from './inventory.entity';
 
-@Unique('inventory_name_unique_key', ['inventoryId', 'name'])
+@Unique('inventory_cell_unique_key', ['inventoryId', 'cell'])
 @Entity()
 export class InventoryItem implements BaseEntity<InventoryItemDto> {
   @PrimaryGeneratedColumn()

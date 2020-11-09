@@ -2,14 +2,14 @@ import { FastifyRoute } from '~pkg/types';
 import { createItemsSchema, deleteItemSchema, getInventorySchema, placeItemSchema } from './schemas';
 import { createItems, deleteItem, getInventory, placeItem } from './service';
 import { UnauthorizedException } from '~pkg/exceptions/UnauthorizedException';
-import { InventoryDto } from 'database/dto/inventory.dto';
-import { InventoryItemPostDto } from 'database/dto/inventory-item-post.dto';
-import { PlaceItemDto } from 'database/dto/place-item.dto';
-import { InventoryItemDto } from 'database/dto/inventory-item.dto';
+import { InventoryDto } from '../../database/dto/inventory.dto';
+import { InventoryItemPostDto } from '../../database/dto/inventory-item-post.dto';
+import { PlaceItemDto } from '../../database/dto/place-item.dto';
+import { InventoryItemDto } from '../../database/dto/inventory-item.dto';
 import { MessageResponse } from '~pkg/types/index';
 import { BadRequestException } from '~pkg/exceptions/BadRequestException';
 import { getRepository } from 'typeorm';
-import { InventoryItem } from 'database/models/inventory-item.entity';
+import { InventoryItem } from '../../database/models/inventory-item.entity';
 
 export const getUserInventory: FastifyRoute = (fastify) =>
   fastify.get(
@@ -50,11 +50,15 @@ export const placeItemInInventory: FastifyRoute = (fastify) =>
       schema: placeItemSchema,
       preValidation: [(fastify as any).authenticate],
     },
-    async (req, res): Promise<InventoryItemDto> => {
-      const body = req.body as PlaceItemDto;
+    async (req, res): Promise<InventoryItemDto | InventoryItemDto[]> => {
+      const body = {
+        ...(req.body as Record<string, any>),
+        id: (req.params as Record<string, any>).itemId as number,
+      } as PlaceItemDto;
       if (req.user) {
         const inventory = await getInventory(req.user);
-        return (await placeItem(inventory, body)).toDto();
+        const result = await placeItem(inventory, body);
+        return Array.isArray(result) ? result.map((r) => r.toDto()) : result.toDto();
       }
       throw new UnauthorizedException();
     }

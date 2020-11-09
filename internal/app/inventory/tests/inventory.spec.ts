@@ -76,6 +76,59 @@ describe('Inventory service', () => {
     expect(it.cell).toBe(cell);
   });
 
+  it('should merge count when placing same items', async () => {
+    const inv = await service.getInventory(testUser);
+    const name = faker.random.words(5);
+    expect(inv).toBeDefined();
+    const item = await service.createItem(inv, {
+      cell: 1,
+      count: 1,
+      description: '',
+      name,
+    });
+    expect(item).toBeDefined();
+    expect(item.count).toBe(1);
+    const itemTwo = await service.createItem(inv, {
+      cell: 2,
+      count: 1,
+      description: '',
+      name,
+    });
+    expect(itemTwo).toBeDefined();
+    expect(itemTwo.count).toBe(1);
+
+    const newItem = (await service.placeItem(inv, { id: itemTwo.id, cell: 1 })) as InventoryItem;
+    expect(Array.isArray(newItem)).toBeFalsy();
+    expect(newItem.count).toBe(item.count + itemTwo.count);
+  });
+
+  it('should swap cells when placing not same items', async () => {
+    const inv = await service.getInventory(testUser);
+    expect(inv).toBeDefined();
+    const item = await service.createItem(inv, {
+      cell: 1,
+      count: 1,
+      description: '',
+      name: faker.random.words(5),
+    });
+    expect(item).toBeDefined();
+    expect(item.count).toBe(1);
+    const itemTwo = await service.createItem(inv, {
+      cell: 2,
+      count: 1,
+      description: '',
+      name: faker.random.words(5),
+    });
+    expect(itemTwo).toBeDefined();
+    expect(itemTwo.count).toBe(1);
+
+    const newItems = (await service.placeItem(inv, { id: itemTwo.id, cell: 1 })) as InventoryItem[];
+    const [f, s] = newItems;
+
+    expect(f.cell).toEqual(itemTwo.cell);
+    expect(s.cell).toEqual(item.cell);
+  });
+
   it("should delete item in user's inventory", async () => {
     const inv = await service.getInventory(testUser);
 

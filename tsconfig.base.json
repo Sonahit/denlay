@@ -16,6 +16,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "baseUrl": "./",
+    "types": ["node", "jest"],
     "paths": {
       "@pkg": ["internal/pkg"],
       "@app": ["internal/app"]

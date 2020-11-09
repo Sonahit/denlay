@@ -2,10 +2,10 @@
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "typeRoots": ["augmentation.d.ts", "node_modules/@types"],
-    "baseUrl": "./"
+    "baseUrl": "./",
   },
   "ts-node": {
-    "files": true
+    "files": true,
   },
   "files": [
     "./app.ts",
