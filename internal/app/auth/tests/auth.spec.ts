@@ -2,7 +2,7 @@ import app from '../app';
 import { createConnection, getConnection, getRepository } from 'typeorm';
 import { User } from '../database/models/user.entity';
 import { sha256 } from '~pkg/utils/hash';
-import cote from 'cote';
+import { req as auth } from '../internal/responders/auth';
 import * as faker from 'faker';
 
 const testUser = { email: faker.internet.email(), password: faker.internet.password(10) };
@@ -21,6 +21,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await getConnection().close();
+  await auth.close();
   await app.close();
 });
 

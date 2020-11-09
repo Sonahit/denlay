@@ -6,6 +6,7 @@ import { plainToClass } from 'class-transformer';
 import * as faker from 'faker';
 import * as service from '../routes/inventory/service';
 import { InventoryItem } from '../database/models/inventory-item.entity';
+import { auth } from '../internal/clients/auth';
 
 const testUser = plainToClass(User, { email: faker.internet.email(), password: faker.internet.password(10) });
 
@@ -24,6 +25,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await getConnection().close();
+  auth.close();
   await app.close();
 });
 
