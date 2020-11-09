@@ -1,3 +1,5 @@
+import { UserDto } from '~pkg/dto/user.dto';
+
 export interface CheckResponse {
-  response: boolean;
+  response: UserDto | false;
 }

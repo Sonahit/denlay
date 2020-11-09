@@ -3,16 +3,16 @@ import { FastifyRequest } from 'fastify';
 import { CheckRequest } from 'internal/clients/requests/CheckRequest';
 import { CheckResponse } from 'internal/clients/responses/CheckResponse';
 import { auth } from '../clients/auth';
+import { getRepository } from 'typeorm';
+import { User } from 'database/models/user.entity';
 
 export default async (req: FastifyRequest) => {
-  const resp = await auth.send<CheckRequest>({ type: 'check', jwt: '' + req.headers.authorization });
-  let json;
-  try {
-    json = JSON.parse(resp) as CheckResponse;
-  } catch (e) {
+  const { response = false } = (await auth.send<CheckRequest>({
+    type: 'check',
+    jwt: '' + (req.headers.authorization || req.headers.jwt),
+  })) as CheckResponse;
+  if (typeof response === 'boolean') {
     throw new UnauthorizedException();
   }
-  if (!json.response) {
-    throw new UnauthorizedException();
-  }
+  req.user = await getRepository(User).findOne({ where: { email: response.email } });
 };

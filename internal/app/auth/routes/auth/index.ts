@@ -1,5 +1,6 @@
+import { JwtService } from 'services/jwt.service';
+import { Container } from '~pkg/core/Container';
 import { BadRequestException } from '~pkg/exceptions/BadRequestException';
-import { blacklist } from '../../services/jwt.service';
 import { FastifyRoute, JWTResponse, MessageResponse } from '~pkg/types';
 import { authSchema, unauthSchema } from './schemas';
 import { authorize } from './service';
@@ -25,10 +26,10 @@ export const auth: FastifyRoute = (fastify) =>
 export const unauth: FastifyRoute = (fastify) =>
   fastify.post('/signout', {
     schema: unauthSchema,
-    preValidation: [(fastify as any).authenticate],
+    preValidation: [(req) => Container.get<JwtService>(JwtService).verifyJwt(req)],
     handler: async (req): Promise<MessageResponse> => {
       const { authorization } = req.headers as { authorization: string };
-      await blacklist(authorization);
+      await Container.get<JwtService>(JwtService).blacklist(authorization);
       try {
         return {
           message: 'messages.ok',

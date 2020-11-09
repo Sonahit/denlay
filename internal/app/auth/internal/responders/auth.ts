@@ -1,5 +1,6 @@
-import { isBlacklisted } from '../../services/jwt.service';
+import { Container } from '~pkg/core/Container';
 import cote from 'cote';
+import { JwtService } from 'services/jwt.service';
 
 export const req = new cote.Responder({
   name: 'Auth-Service',
@@ -11,9 +12,19 @@ type Check = {
   jwt: string;
 };
 
-req.on<Check>('check', (data, done) => {
-  done(null, {
-    type: 'check',
-    response: isBlacklisted(data.jwt),
-  });
+req.on<Check>('check', async (data, done) => {
+  const jwtService = Container.get<JwtService>(JwtService);
+
+  try {
+    const resp = await jwtService.isBlacklisted(data.jwt);
+    done(null, {
+      type: 'check',
+      response: resp,
+    });
+  } catch (e) {
+    done(null, {
+      type: 'check',
+      response: false,
+    });
+  }
 });

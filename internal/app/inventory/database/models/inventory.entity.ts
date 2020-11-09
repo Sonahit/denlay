@@ -29,11 +29,13 @@ export class Inventory implements BaseEntity<InventoryDto> {
   })
   items!: Promise<InventoryItem[]>;
 
-  toDto(): InventoryDto {
+  async toDto(): Promise<InventoryDto> {
+    const items = await this.items;
     return {
       id: this.id,
       cells: this.cells,
       userId: this.userId,
+      invItems: items.length ? items.map((i) => i.toDto()) : [],
     };
   }
 }

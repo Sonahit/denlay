@@ -1,7 +1,7 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Expose } from 'class-transformer';
 import { BaseEntity } from '../../../../pkg/types';
-import { UserDto } from '../dto/user.dto';
+import { UserDto } from '~pkg/dto/user.dto';
 
 @Entity()
 export class User implements BaseEntity<UserDto> {
@@ -19,8 +19,9 @@ export class User implements BaseEntity<UserDto> {
   @Expose()
   password!: string;
 
-  toDto() {
+  toDto(): UserDto {
     return {
+      id: this.id,
       email: this.email,
     };
   }

@@ -10,7 +10,8 @@ import swagger from '~pkg/plugins/swagger';
 import routes from './routes';
 import errorHandler from '~pkg/plugins/error-handler';
 import payloadHandler from '~pkg/plugins/payload-handler';
-import { verifyJwt } from './services/jwt.service';
+import { JwtService } from './services/jwt.service';
+import { Container } from '~pkg/core/Container';
 
 const fastify = _fastify({
   ignoreTrailingSlash: true,
@@ -28,6 +29,11 @@ const fastify = _fastify({
 fastify.register(payloadHandler);
 fastify.register(errorHandler);
 
+fastify.register((f, _, n) => {
+  Container.bind(JwtService, new JwtService(f));
+  n();
+});
+
 fastify.register(plgEnv);
 fastify.register(cors);
 fastify.register(fastifySwagger, {
@@ -36,8 +42,6 @@ fastify.register(fastifySwagger, {
 });
 
 fastify.register(fastifyJwt, { secret: process.env.SECRET || 'secret' });
-
-fastify.decorate('authenticate', verifyJwt);
 
 fastify.register(swagger);
 

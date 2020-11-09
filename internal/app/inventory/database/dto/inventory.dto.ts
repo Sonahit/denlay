@@ -1,4 +1,5 @@
 import { Inventory } from '../interfaces/Inventory';
+import { InventoryItemDto } from './inventory-item.dto';
 
 export class InventoryDto implements Inventory {
   id!: number;
@@ -6,4 +7,6 @@ export class InventoryDto implements Inventory {
   userId!: number;
 
   cells!: number;
+
+  invItems!: InventoryItemDto[];
 }

@@ -16,3 +16,7 @@ export interface JWTResponse {
 }
 
 export type FastifyRoute = (fastify: FastifyInstance) => FastifyInstance;
+
+export interface Type<T> extends Function {
+  new (...args: any[]): T;
+}

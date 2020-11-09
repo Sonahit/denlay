@@ -3,5 +3,12 @@
   "compilerOptions": {
     "typeRoots": ["augmentation.d.ts", "node_modules/@types"],
     "baseUrl": "./"
-  }
+  },
+  "ts-node": {
+    "files": true
+  },
+  "files": [
+    "./app.ts",
+    "./augmentation.d.ts"
+  ]
 }
