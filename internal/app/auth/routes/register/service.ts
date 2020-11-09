@@ -1,7 +1,7 @@
-import { User } from '@database/models/user.entity';
-import { BadRequestException } from '@exceptions/BadRequestException';
-import { sha256 } from '@utils/hash';
-import { getConnection } from '../internal/plugins/node_modules/typeorm';
+import { User } from '../../database/models/user.entity';
+import { BadRequestException } from '~pkg/exceptions/BadRequestException';
+import { sha256 } from '~pkg/utils/hash';
+import { getConnection } from 'typeorm';
 
 export const register = (email: string, password: string): Promise<User> => {
   return getConnection().transaction(async (em) => {

@@ -2,7 +2,7 @@ import fp from 'fastify-plugin';
 import { DotenvConfigOptions } from 'dotenv/types';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
-import { TFastifyPlugin } from '../services/inventory/types';
+import { TFastifyPlugin } from '../types';
 
 const dotenvFp: TFastifyPlugin<DotenvConfigOptions> = (fastify, denv, next) => {
   if (!denv || !denv.path) {

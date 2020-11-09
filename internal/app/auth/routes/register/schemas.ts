@@ -1,4 +1,4 @@
-import { FastifySchema } from '../internal/plugins/node_modules/fastify';
+import { FastifySchema } from 'fastify';
 
 export const registerSchema: FastifySchema = {
   description: 'Регистрация',

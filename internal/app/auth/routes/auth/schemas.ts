@@ -1,5 +1,5 @@
-import { HttpSchemas } from '@schemas/http/http-schemas.enum';
-import { FastifySchema } from '../internal/plugins/node_modules/fastify';
+import { HttpSchemas } from '~pkg/schemas/http/http-schemas.enum';
+import { FastifySchema } from 'fastify';
 
 export const authSchema: FastifySchema = {
   description: 'Авторизация',

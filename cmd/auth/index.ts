@@ -1,4 +1,4 @@
-import app from '../../internal/services/auth/app';
+import app from '../../internal/app/auth/app';
 
 const port = process.env.PORT || 3001;
 async function boot() {

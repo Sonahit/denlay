@@ -1,11 +1,9 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from '../internal/services/inventory/node_modules/typeorm';
-import { Expose } from '../internal/services/inventory/routes/inventory/node_modules/class-transformer';
-import { BaseEntity } from '../../types';
-import { UserDto } from '../dto/user.dto';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Expose } from 'class-transformer';
 import { Inventory } from './inventory.entity';
 
 @Entity()
-export class User implements BaseEntity<UserDto> {
+export class User {
   @PrimaryGeneratedColumn()
   @Expose()
   id!: number;
@@ -24,10 +22,4 @@ export class User implements BaseEntity<UserDto> {
     lazy: true,
   })
   inventory!: Promise<Inventory>;
-
-  toDto() {
-    return {
-      email: this.email,
-    };
-  }
 }

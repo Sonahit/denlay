@@ -1,8 +1,8 @@
-import { JwtBlacklist } from '@database/models/jwt-blacklist.entity';
-import { FastifyRequest } from '../internal/plugins/node_modules/fastify';
-import { ForbiddenException } from '@exceptions/ForbiddenException';
-import { UnauthorizedException } from '@exceptions/UnauthorizedException';
-import { getConnection, getRepository } from '../internal/plugins/node_modules/typeorm';
+import { JwtBlacklist } from '../database/models/jwt-blacklist.entity';
+import { FastifyRequest } from 'fastify';
+import { ForbiddenException } from '~pkg/exceptions/ForbiddenException';
+import { UnauthorizedException } from '~pkg/exceptions/UnauthorizedException';
+import { getConnection, getRepository } from 'typeorm';
 
 export const parseJwt = (str: string): string => {
   return (str.startsWith('Bearer') ? str.replace('Bearer', '') : str).trim();

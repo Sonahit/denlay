@@ -1,7 +1,8 @@
-import app from '../../auth/src/app';
+import app from '../app';
 import { createConnection, getConnection, getRepository } from 'typeorm';
-import { User } from '../../auth/src/database/models/user.entity';
-import { sha256 } from '../../auth/src/utils/hash';
+import { User } from '../database/models/user.entity';
+import { sha256 } from '~pkg/utils/hash';
+import cote from 'cote';
 import * as faker from 'faker';
 
 const testUser = { email: faker.internet.email(), password: faker.internet.password(10) };

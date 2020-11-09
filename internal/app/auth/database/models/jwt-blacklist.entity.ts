@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn } from '../internal/services/inventory/node_modules/typeorm';
+import { Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class JwtBlacklist {

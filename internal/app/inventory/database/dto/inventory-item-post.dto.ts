@@ -1,4 +1,4 @@
-import { InventoryItem } from '@database/interfaces/InventoryItem';
+import { InventoryItem } from '../interfaces/InventoryItem';
 import { IsNumber, IsString, IsOptional } from 'class-validator';
 
 export class InventoryItemPostDto implements InventoryItem {

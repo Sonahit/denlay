@@ -1,4 +1,4 @@
-import { FastifyRoute } from '../../types';
+import { FastifyRoute } from '~pkg/types';
 import { createItemsSchema, deleteItemSchema, getInventorySchema, placeItemSchema } from './schemas';
 
 export const getInventory: FastifyRoute = (fastify) =>

@@ -1,11 +1,11 @@
-import app from '../src/app';
+import app from '../app';
 import { createConnection, getConnection, getRepository } from 'typeorm';
-import { User } from '../src/database/models/user.entity';
-import { sha256 } from '../src/utils/hash';
+import { User } from '../database/models/user.entity';
+import { sha256 } from '~pkg/utils/hash';
 import { plainToClass } from 'class-transformer';
 import * as faker from 'faker';
-import * as service from '../src/routes/inventory/service';
-import { InventoryItem } from '@database/models/inventory-item.entity';
+import * as service from '../routes/inventory/service';
+import { InventoryItem } from '../database/models/inventory-item.entity';
 
 const testUser = plainToClass(User, { email: faker.internet.email(), password: faker.internet.password(10) });
 

@@ -1,17 +1,7 @@
 {
-  "extends": "../../../tsconfig.base",
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "typeRoots": ["augmentation.d.ts", "node_modules/@types"],
-    "baseUrl": "./src",
-    "paths": {
-      "@types/*": ["types/*"],
-      "@utils/*": ["utils/*"],
-      "@database/*": ["database/*"],
-      "@enums/*": ["enums/*"],
-      "@exceptions/*": ["exceptions/*"],
-      "@schemas/*": ["schemas/*"],
-      "@services/*": ["services/*"],
-      "@plugins/*": ["plugins/*"],
-    }
+    "baseUrl": "./"
   }
 }

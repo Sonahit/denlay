@@ -13,10 +13,11 @@
     "fastify-swagger": "^3.5.0",
     "pg": "^8.4.2",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.29"
+    "typeorm": "^0.2.29",
+    "~pkg": "../../pkg/"
   },
   "scripts": {
-    "start": "yarn ts-node -r tsconfig-paths/register -P ./tsconfig.json ./index.ts",
+    "start": "yarn ts-node -r tsconfig-paths/register -P ./tsconfig.json ../../../cmd/auth/index",
     "test": "yarn jest --detectOpenHandles"
   },
   "devDependencies": {
@@ -43,14 +44,7 @@
     ],
     "moduleNameMapper": {
       "^__stubs__": "<rootDir>/__stubs__/index.ts",
-      "^__mocks__": "<rootDir>/__mocks__/index.ts",
-      "^@utils/(.*)": "<rootDir>/internal/utils/$1",
-      "^@database/(.*)": "<rootDir>/internal/database/$1",
-      "^@enums/(.*)": "<rootDir>/internal/enums/$1",
-      "^@exceptions/(.*)": "<rootDir>/internal/exceptions/$1",
-      "^@schemas/(.*)": "<rootDir>/internal/schemas/$1",
-      "^@services/(.*)": "<rootDir>/internal/services/$1",
-      "^@plugins/(.*)": "<rootDir>/internal/plugins/$1"
+      "^__mocks__": "<rootDir>/__mocks__/index.ts"
     },
     "rootDir": "./tests",
     "testRegex": ".spec.ts$",

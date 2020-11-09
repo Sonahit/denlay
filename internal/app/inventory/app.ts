@@ -1,14 +1,14 @@
 import 'reflect-metadata';
-import _fastify from '../internal/plugins/node_modules/fastify';
+import _fastify from 'fastify';
 import cors from 'fastify-cors';
 import fastifySwagger from 'fastify-swagger';
-import { createConnection } from '../internal/plugins/node_modules/typeorm';
-import plgEnv from '@plugins/env';
-import swagger from '@plugins/swagger';
+import { createConnection } from 'typeorm';
+import plgEnv from '~pkg/plugins/env';
+import swagger from '~pkg/plugins/swagger';
 import routes from './routes';
-import errorHandler from '@plugins/error-handler';
-import payloadHandler from '@plugins/payload-handler';
-import checkAuth from 'internal/utils/checkAuth';
+import errorHandler from '~pkg/plugins/error-handler';
+import payloadHandler from '~pkg/plugins/payload-handler';
+import checkAuth from './internal/utils/checkAuth';
 
 const fastify = _fastify({
   ignoreTrailingSlash: true,

@@ -1,4 +1,4 @@
-import { FastifyRoute } from '../types/index';
+import { FastifyRoute } from '~pkg/types/index';
 
 export const get: FastifyRoute = (fastify) => {
   return fastify.get('/ping', {

@@ -1,7 +1,7 @@
-import { FastifyInstance } from '../internal/plugins/node_modules/fastify';
+import { FastifyInstance } from 'fastify';
 import ping from './ping';
 import inventory from './inventory/index';
-import { FastifyRoute } from '../types/index';
+import { FastifyRoute } from '~pkg/types/index';
 
 export default (fastify: FastifyInstance) => {
   const registerRoute = (route: FastifyRoute) => route(fastify);

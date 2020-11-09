@@ -1,4 +1,4 @@
-import { Inventory } from '@database/interfaces/Inventory';
+import { Inventory } from '../interfaces/Inventory';
 
 export class InventoryDto implements Inventory {
   id!: number;

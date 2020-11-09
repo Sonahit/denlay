@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "class-transformer": "^0.3.1",
     "cote": "^1.0.0",
     "dotenv": "^8.2.0",
     "fastify": "^3.7.0",
@@ -12,10 +13,11 @@
     "fastify-swagger": "^3.5.0",
     "pg": "^8.4.2",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.29"
+    "typeorm": "^0.2.29",
+    "~pkg": "../../pkg/"
   },
   "scripts": {
-    "start": "yarn ts-node -r tsconfig-paths/register -P ./tsconfig.json ./index.ts",
+    "start": "yarn ts-node -r tsconfig-paths/register -P ./tsconfig.json ../../../cmd/auth/index",
     "test": "yarn jest --detectOpenHandles"
   },
   "devDependencies": {
@@ -43,13 +45,7 @@
     "moduleNameMapper": {
       "^__stubs__": "<rootDir>/__stubs__/index.ts",
       "^__mocks__": "<rootDir>/__mocks__/index.ts",
-      "^@utils/(.*)": "<rootDir>/../src/utils/$1",
-      "^@database/(.*)": "<rootDir>/../src/database/$1",
-      "^@enums/(.*)": "<rootDir>/../src/enums/$1",
-      "^@exceptions/(.*)": "<rootDir>/../src/exceptions/$1",
-      "^@schemas/(.*)": "<rootDir>/../src/schemas/$1",
-      "^@services/(.*)": "<rootDir>/../src/services/$1",
-      "^@plugins/(.*)": "<rootDir>/../src/plugins/$1"
+      "^@pkg/.*": "<rootDir>/../../../pkg/$1"
     },
     "rootDir": "./tests",
     "testRegex": ".spec.ts$",

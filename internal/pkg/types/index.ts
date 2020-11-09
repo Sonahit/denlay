@@ -1,4 +1,4 @@
-import { FastifyInstance } from '../internal/plugins/node_modules/fastify';
+import { FastifyInstance } from 'fastify';
 
 export type NextFn = (err?: Error) => void;
 

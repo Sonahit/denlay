@@ -1,4 +1,4 @@
-import { InventoryItem } from '@database/interfaces/InventoryItem';
+import { InventoryItem } from '../interfaces/InventoryItem';
 import { IsNumber, IsOptional } from 'class-validator';
 
 export class PlaceItemDto implements Partial<InventoryItem> {

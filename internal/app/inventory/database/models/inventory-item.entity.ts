@@ -1,12 +1,6 @@
-import { BaseEntity } from '../../types';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  Unique,
-} from '../internal/services/inventory/node_modules/typeorm';
-import { InventoryItemDto } from '@database/dto/inventory-item.dto';
+import { BaseEntity } from '~pkg/types';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { InventoryItemDto } from '..//dto/inventory-item.dto';
 import { Inventory } from './inventory.entity';
 
 @Unique('inventory_name_unique_key', ['inventoryId', 'name'])

@@ -1,4 +1,4 @@
-import { isBlacklisted } from '@services/jwt.service';
+import { isBlacklisted } from '../../services/jwt.service';
 import cote from 'cote';
 
 export const req = new cote.Responder({

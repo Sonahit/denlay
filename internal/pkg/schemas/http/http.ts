@@ -1,4 +1,4 @@
-import { FastifyInstance } from '../internal/plugins/node_modules/fastify';
+import { FastifyInstance } from 'fastify';
 import { HttpStatus } from '../../enums/HttpStatus';
 
 export const registerHttpSchema = (fastify: FastifyInstance) => (code: number, message?: string, status?: boolean) => {

@@ -1,4 +1,4 @@
-import { FastifyInstance } from '../internal/plugins/node_modules/fastify';
+import { FastifyInstance } from 'fastify';
 
 export default function (fastify: FastifyInstance) {
   const code = 200;

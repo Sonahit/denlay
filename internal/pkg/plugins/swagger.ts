@@ -4,7 +4,7 @@ import { ObjectLiteral } from 'typeorm';
 import { HttpStatus } from '../enums/HttpStatus';
 import { registerHttpSchema } from '../schemas/http/http';
 import { HttpSchemas } from '../schemas/http/http-schemas.enum';
-import { TFastifyPlugin } from '../services/inventory/types';
+import { TFastifyPlugin } from '../types/index';
 import { enumToArray } from '../utils/enumToArray';
 import jwtSchema from '../schemas/http/jwt-schema';
 

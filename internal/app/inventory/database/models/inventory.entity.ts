@@ -1,13 +1,6 @@
-import { BaseEntity } from '../../types';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from '../internal/services/inventory/node_modules/typeorm';
-import { InventoryDto } from '@database/dto/inventory.dto';
+import { BaseEntity } from '~pkg/types';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { InventoryDto } from '../dto/inventory.dto';
 import { User } from './user.entity';
 import { InventoryItem } from './inventory-item.entity';
 

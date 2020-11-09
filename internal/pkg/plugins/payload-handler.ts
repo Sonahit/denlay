@@ -1,7 +1,7 @@
-import { HttpStatus } from '@enums/HttpStatus';
+import { HttpStatus } from '../enums/HttpStatus';
 import fp from 'fastify-plugin';
-import { Response } from 'interfaces/Response';
-import { TFastifyPlugin } from '../services/inventory/types';
+import { Response } from '../interfaces/Response';
+import { TFastifyPlugin } from '../types';
 
 const payloadHandler: TFastifyPlugin = (fastify, _, next) => {
   fastify.addHook('onSend', (req, res, data: any, done) => {

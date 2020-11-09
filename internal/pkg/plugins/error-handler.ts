@@ -1,9 +1,9 @@
-import { HttpStatus } from '@enums/HttpStatus';
-import { HttpException } from '@exceptions/HttpException';
+import { HttpStatus } from '../enums/HttpStatus';
+import { HttpException } from '../exceptions/HttpException';
 import { FastifyError } from 'fastify';
 import fp from 'fastify-plugin';
-import { ErrorResponse } from 'interfaces/ErrorResponse';
-import { TFastifyPlugin } from '../services/inventory/types';
+import { ErrorResponse } from '../interfaces/ErrorResponse';
+import { TFastifyPlugin } from '../types';
 
 const errorHandlerFp: TFastifyPlugin = (fastify, _, next) => {
   fastify.setErrorHandler((err: FastifyError | HttpException, req, res) => {

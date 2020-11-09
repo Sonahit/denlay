@@ -1,6 +1,6 @@
-import { BadRequestException } from '@exceptions/BadRequestException';
-import { blacklist } from '@services/jwt.service';
-import { FastifyRoute, JWTResponse, MessageResponse } from '../../../../types';
+import { BadRequestException } from '~pkg/exceptions/BadRequestException';
+import { blacklist } from '../../services/jwt.service';
+import { FastifyRoute, JWTResponse, MessageResponse } from '~pkg/types';
 import { authSchema, unauthSchema } from './schemas';
 import { authorize } from './service';
 
