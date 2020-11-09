@@ -1,8 +1,4 @@
-import { getConnection } from 'typeorm';
-import { User } from '~pkg/database/models/user.entity';
-import { HttpStatus } from '~pkg/enums/HttpStatus';
 import { BadRequestException } from '~pkg/exceptions/BadRequestException';
-import { sha256 } from '~pkg/utils/hash';
 import { FastifyRoute, MessageResponse } from '~pkg/types';
 import { register } from './service';
 import { registerSchema } from './schemas';

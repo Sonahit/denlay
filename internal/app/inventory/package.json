@@ -17,7 +17,7 @@
     "~pkg": "../../pkg/"
   },
   "scripts": {
-    "start": "yarn ts-node -r tsconfig-paths/register -P ./tsconfig.json ../../../cmd/auth/index",
+    "start": "yarn ts-node -r tsconfig-paths/register -P ./tsconfig.json ../../../cmd/inventory/index",
     "test": "yarn jest --detectOpenHandles"
   },
   "devDependencies": {
