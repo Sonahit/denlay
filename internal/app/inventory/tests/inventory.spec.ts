@@ -1,3 +1,4 @@
+import '@types/jest';
 import app from '../app';
 import { createConnection, getConnection, getRepository } from 'typeorm';
 import { User } from '../database/models/user.entity';
