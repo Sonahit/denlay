@@ -16,64 +16,59 @@ const fastify = _fastify({
   ajv: {
     customOptions: {
       allErrors: true,
-      jsonPointers: false,
-      coerceTypes: true,
-      validateSchema: false,
+      validateSchema: true,
     },
   },
 });
 
-fastify.register(payloadHandler);
-fastify.register(errorHandler);
-
-fastify.register(plgEnv);
-fastify.register(cors);
-fastify.register(fastifySwagger, {
-  routePrefix: '/docs',
-  exposeRoute: true,
-  swagger: {
-    definitions: {
-      Inv: {
-        type: 'object',
-        properties: {
-          id: { type: 'number' },
-          userId: { type: 'number' },
-          cells: { type: 'number' },
-          items: { type: 'array', items: { $ref: '#/definitions/InvItem' } },
+fastify
+  .register(payloadHandler)
+  .register(errorHandler)
+  .register(plgEnv)
+  .register(cors)
+  .register(fastifySwagger, {
+    routePrefix: '/docs',
+    exposeRoute: true,
+    swagger: {
+      definitions: {
+        Inv: {
+          type: 'object',
+          properties: {
+            id: { type: 'number' },
+            userId: { type: 'number' },
+            cells: { type: 'number' },
+            items: { type: 'array', items: { $ref: '#/definitions/InvItem' } },
+          },
+        },
+        InvItem: {
+          type: 'object',
+          required: ['name'],
+          properties: {
+            name: { type: 'string' },
+            description: { type: 'string' },
+            count: { type: 'number' },
+            cell: { type: 'number' },
+            inventoryId: { type: 'number' },
+          },
         },
       },
-      InvItem: {
-        type: 'object',
-        required: ['name'],
-        properties: {
-          name: { type: 'string' },
-          description: { type: 'string' },
-          count: { type: 'number' },
-          cell: { type: 'number' },
-          inventoryId: { type: 'number' },
+      securityDefinitions: {
+        apiKey: {
+          type: 'apiKey',
+          name: 'jwt',
+          in: 'header',
         },
       },
     },
-    securityDefinitions: {
-      apiKey: {
-        type: 'apiKey',
-        name: 'jwt',
-        in: 'header',
-      },
-    },
-  },
-});
-
-fastify.register(swagger);
-
-fastify.decorate('authenticate', checkAuth);
+  })
+  .register(swagger)
+  .decorate('authenticate', checkAuth)
+  .ready(() => {
+    createConnection()
+      .then(() => fastify.log.info('Connected to db'))
+      .catch(console.error);
+  });
 
 routes(fastify);
-
-fastify.ready(() => {
-  createConnection()
-    .then(() => fastify.log.info('Connected to db'))
-    .catch(console.error);
-});
 
 export default fastify;

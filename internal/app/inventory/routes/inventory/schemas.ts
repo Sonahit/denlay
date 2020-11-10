@@ -3,14 +3,14 @@ import { FastifySchema } from 'fastify';
 export const getInventorySchema: FastifySchema = {
   summary: 'Получить инвентарь юзера',
   response: {
-    '2xx': {
-      type: 'object',
-      properties: {
-        data: {
-          $ref: '#/definitions/Inv',
-        },
-      },
-    },
+    // 200: {
+    //   type: 'object',
+    //   properties: {
+    //     data: {
+    //       $ref: '#/definitions/Inv',
+    //     },
+    //   },
+    // },
   },
   security: [
     {
@@ -28,12 +28,13 @@ export const createItemsSchema: FastifySchema = {
     },
   },
   response: {
-    '2xx': {
+    200: {
       type: 'object',
       properties: {
         data: {
           type: 'array',
           items: {
+            type: 'object',
             $ref: '#/definitions/InvItem',
           },
         },
@@ -56,29 +57,33 @@ export const placeItemSchema: FastifySchema = {
     },
   },
   response: {
-    '2xx': {
+    200: {
       type: 'object',
-      oneOf: [
-        {
-          type: 'object',
-          properties: {
-            data: {
-              $ref: '#/definitions/InvItem',
-            },
-          },
-        },
-        {
-          type: 'object',
-          properties: {
-            data: {
-              type: 'array',
-              items: {
+      properties: {
+        oneOf: [
+          {
+            type: 'object',
+            properties: {
+              data: {
+                type: 'object',
                 $ref: '#/definitions/InvItem',
               },
             },
           },
-        },
-      ],
+          {
+            type: 'object',
+            properties: {
+              data: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  $ref: '#/definitions/InvItem',
+                },
+              },
+            },
+          },
+        ],
+      },
     },
   },
   params: {

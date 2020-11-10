@@ -14,7 +14,8 @@ export const getInventory = async (user: User): Promise<Inventory> => {
   const inv = await invRep.findOne({ where: { userId: user.id } });
 
   if (!inv) {
-    return await invRep.save({ userId: user.id, cells: DEFAULT_CELLS });
+    const newInv = await invRep.save({ userId: user.id, cells: DEFAULT_CELLS });
+    return newInv;
   }
 
   return inv;
@@ -30,7 +31,7 @@ export const createItem = async (inventory: Inventory, itemPostDto: InventoryIte
 
   itemPost.inventoryId = inventory.id;
 
-  return await invItemRep.save(itemPost);
+  return invItemRep.create(await invItemRep.save(itemPost));
 };
 
 export const createItems = async (
@@ -63,10 +64,14 @@ export const placeItem = async (
     const temp = inCellItem.cell;
     inCellItem.cell = item.cell;
     item.cell = -1;
+
     await invItemRep.save(item);
+
     const newInCellItem = await invItemRep.save(inCellItem);
+
     item.cell = temp;
     const newItem = await invItemRep.save(item);
+
     return [newInCellItem, newItem];
   }
 

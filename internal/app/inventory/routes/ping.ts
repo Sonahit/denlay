@@ -1,11 +1,9 @@
-import { FastifyRoute } from '~pkg/types/index';
+import { FastifyInstance } from 'fastify';
 
-export const get: FastifyRoute = (fastify) => {
+export default (fastify: FastifyInstance) => {
   return fastify.get('/ping', {
     handler: async () => {
       return 'pong';
     },
   });
 };
-
-export default [get];
