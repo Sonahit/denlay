@@ -1,4 +1,4 @@
-import { FastifyRoute } from '~pkg/types';
+import { FastifyRoute } from '@denlay/core/types';
 // TODO:
 export const post: FastifyRoute = (fastify) => {
   return fastify;

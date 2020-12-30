@@ -5,7 +5,7 @@ import { Inventory } from '../../database/models/inventory.entity';
 import { User } from '../../database/models/user.entity';
 import { getRepository } from 'typeorm';
 import { plainToClass } from 'class-transformer';
-import { BadRequestException } from '~pkg/exceptions/BadRequestException';
+import { BadRequestException } from '@denlay/core/exceptions/BadRequestException';
 import { DEFAULT_CELLS } from './constants';
 
 export const getInventory = async (user: User): Promise<Inventory> => {

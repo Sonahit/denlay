@@ -1,7 +1,7 @@
 import app from '../app';
 import { createConnection, getConnection, getRepository } from 'typeorm';
 import { User } from '../database/models/user.entity';
-import { sha256 } from '~pkg/utils/hash';
+import { sha256 } from '@denlay/core/utils/hash';
 import { req as auth } from '../internal/responders/auth';
 import * as faker from 'faker';
 

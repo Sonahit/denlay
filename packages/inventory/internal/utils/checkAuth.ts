@@ -1,4 +1,4 @@
-import { UnauthorizedException } from '~pkg/exceptions/UnauthorizedException';
+import { UnauthorizedException } from '@denlay/core/exceptions/UnauthorizedException';
 import { FastifyRequest } from 'fastify';
 import { CheckRequest } from 'internal/clients/requests/CheckRequest';
 import { CheckResponse } from 'internal/clients/responses/CheckResponse';

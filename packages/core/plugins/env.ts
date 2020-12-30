@@ -1,15 +1,15 @@
 import fp from 'fastify-plugin';
 import { DotenvConfigOptions } from 'dotenv/types';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import { resolve } from 'path';
-import { TFastifyPlugin } from '../types';
+import { FastifyInstance } from 'fastify';
 
-const dotenvFp: TFastifyPlugin<DotenvConfigOptions> = (fastify, denv, next) => {
+const dotenvFp = (fastify: FastifyInstance, denv: DotenvConfigOptions, next: (err?: Error) => void) => {
   if (!denv || !denv.path) {
     if (!denv) {
       denv = {};
     }
-    denv.path = resolve(process.cwd(), '.env');
+    denv.path = resolve(__dirname, '..', '..', '..', '.env');
   }
   dotenv.config(denv);
   (fastify as any).env = process.env;

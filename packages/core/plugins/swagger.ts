@@ -1,14 +1,13 @@
-import { FastifySchema } from 'fastify';
+import { FastifyInstance, FastifySchema } from 'fastify';
 import fp from 'fastify-plugin';
 import { ObjectLiteral } from 'typeorm';
 import { HttpStatus } from '../enums/HttpStatus';
 import { registerHttpSchema } from '../schemas/http/http';
 import { HttpSchemas } from '../schemas/http/http-schemas.enum';
-import { TFastifyPlugin } from '../types/index';
 import { enumToArray } from '../utils/enumToArray';
 import jwtSchema from '../schemas/http/jwt-schema';
 
-const swaggerFp: TFastifyPlugin = (fastify, opts, next) => {
+const swaggerFp = (fastify: FastifyInstance, _: any, next: (err?: Error) => void) => {
   const register = registerHttpSchema(fastify);
   jwtSchema(fastify);
 

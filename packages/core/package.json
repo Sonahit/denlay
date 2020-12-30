@@ -1,5 +1,5 @@
 {
-  "name": "denlay-core",
+  "name": "@denlay/core",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,12 +13,14 @@
     "dotenv": "^8.2.0",
     "fastify": "^3.7.0",
     "fastify-cors": "^4.1.0",
+    "fastify-plugin": "^3.0.0",
     "fastify-swagger": "^3.5.0",
     "pg": "^8.4.2",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.29"
   },
   "devDependencies": {
-    "@types/node": "^14.14.7"
+    "@types/node": "^14.14.7",
+    "typescript": "^4.1.3"
   }
 }

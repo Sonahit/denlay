@@ -1,6 +1,6 @@
 import { User } from '../../database/models/user.entity';
-import { BadRequestException } from '~pkg/exceptions/BadRequestException';
-import { sha256 } from '~pkg/utils/hash';
+import { BadRequestException } from '@denlay/core/exceptions/BadRequestException';
+import { sha256 } from '@denlay/core/utils/hash';
 import { getConnection } from 'typeorm';
 type JWT = string;
 

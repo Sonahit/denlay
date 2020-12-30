@@ -2,12 +2,16 @@
   "name": "denlay",
   "version": "1.0.0",
   "main": "index.js",
+  "private": true,
   "repository": "https://github.com/Sonahit/denlay.git",
   "author": "Ivan Sadykov <grandpajok@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "lerna": "^3.22.1"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "postinstall": "yarn pkg:install",
     "pkg:install": "lerna bootstrap",

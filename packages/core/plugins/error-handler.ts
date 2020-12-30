@@ -1,11 +1,10 @@
 import { HttpStatus } from '../enums/HttpStatus';
 import { HttpException } from '../exceptions/HttpException';
-import { FastifyError } from 'fastify';
+import { FastifyError, FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 import { ErrorResponse } from '../interfaces/ErrorResponse';
-import { TFastifyPlugin } from '../types';
 
-const errorHandlerFp: TFastifyPlugin = (fastify, _, next) => {
+const errorHandlerFp = (fastify: FastifyInstance, _: any, next: (err?: Error) => void) => {
   fastify.setErrorHandler((err: FastifyError | HttpException, req, res) => {
     const code = err.statusCode ? err.statusCode : HttpStatus.InternalError;
     const payload: ErrorResponse = {

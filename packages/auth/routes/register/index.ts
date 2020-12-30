@@ -1,5 +1,5 @@
-import { BadRequestException } from '~pkg/exceptions/BadRequestException';
-import { FastifyRoute, MessageResponse } from '~pkg/types';
+import { BadRequestException } from '@denlay/core/exceptions/BadRequestException';
+import { FastifyRoute, MessageResponse } from '@denlay/core/types';
 import { register } from './service';
 import { registerSchema } from './schemas';
 

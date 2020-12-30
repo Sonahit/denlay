@@ -1,5 +1,5 @@
 import { FastifySchema } from 'fastify';
-import { JSonSCHEMA7 } from 'json-schema';
+import { JSONSchema7 } from 'json-schema';
 
 export const registerSchema: FastifySchema = {
   description: 'Регистрация',
@@ -20,5 +20,5 @@ export const registerSchema: FastifySchema = {
         minLength: 1,
       },
     },
-  } as JSonSCHEMA7,
+  } as JSONSchema7,
 };

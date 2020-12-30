@@ -1,7 +1,7 @@
 import { JwtService } from 'services/jwt.service';
-import { Container } from '~pkg/core/Container';
-import { BadRequestException } from '~pkg/exceptions/BadRequestException';
-import { FastifyRoute, JWTResponse, MessageResponse } from '~pkg/types';
+import { Container } from '@denlay/core/core/Container';
+import { BadRequestException } from '@denlay/core/exceptions/BadRequestException';
+import { FastifyRoute, JWTResponse, MessageResponse } from '@denlay/core/types';
 import { authSchema, unauthSchema } from './schemas';
 import { authorize } from './service';
 

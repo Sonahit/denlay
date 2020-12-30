@@ -1,7 +1,11 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "typeRoots": ["augmentation.d.ts", "node_modules/@types"],
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "types": ["node", "jest"]
+  },
+  "include": ["./**/*.ts", "../../ormconfig.js", "../../ormconfig.example.js"],
+  "ts-node": {
+    "files": true,
   }
 }

@@ -1,9 +1,9 @@
 import { HttpStatus } from '../enums/HttpStatus';
 import fp from 'fastify-plugin';
 import { Response } from '../interfaces/Response';
-import { TFastifyPlugin } from '../types';
+import { FastifyInstance } from 'fastify';
 
-const payloadHandler: TFastifyPlugin = (fastify, _, next) => {
+const payloadHandler = (fastify: FastifyInstance, _: any, next: (err?: Error) => void) => {
   fastify.addHook('onSend', (req, res, data: any, done) => {
     let message = 'messages.ok';
     const code = res.statusCode ? res.statusCode : HttpStatus.OK;

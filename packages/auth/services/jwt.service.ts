@@ -1,10 +1,10 @@
 import { JwtBlacklist } from '../database/models/jwt-blacklist.entity';
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import { ForbiddenException } from '~pkg/exceptions/ForbiddenException';
-import { UnauthorizedException } from '~pkg/exceptions/UnauthorizedException';
+import { ForbiddenException } from '@denlay/core/exceptions/ForbiddenException';
+import { UnauthorizedException } from '@denlay/core/exceptions/UnauthorizedException';
 import { getConnection, getRepository } from 'typeorm';
 import { User } from '../database/models/user.entity';
-import { BadRequestException } from '~pkg/exceptions/BadRequestException';
+import { BadRequestException } from '@denlay/core/exceptions/BadRequestException';
 import { UserDto } from '../database/dto/user.dto';
 import userMapper from 'mappers/user.mapper';
 

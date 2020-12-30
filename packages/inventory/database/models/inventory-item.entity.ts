@@ -1,4 +1,4 @@
-import { BaseEntity } from '~pkg/types';
+import { BaseEntity } from '@denlay/core/types';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { InventoryItemDto } from '../dto/inventory-item.dto';
 import { Inventory } from './inventory.entity';

@@ -1,13 +1,13 @@
 import { getRepository } from 'typeorm';
 import { FastifyInstance } from 'fastify';
-import { UnauthorizedException } from '~pkg/exceptions/UnauthorizedException';
-import { MessageResponse } from '~pkg/types/index';
+import { UnauthorizedException } from '@denlay/core/exceptions/UnauthorizedException';
+import { MessageResponse } from '@denlay/core/types/index';
 import { InventoryDto } from '../../database/dto/inventory.dto';
 import { InventoryItemPostDto } from '../../database/dto/inventory-item-post.dto';
 import { PlaceItemDto } from '../../database/dto/place-item.dto';
 import { InventoryItemDto } from '../../database/dto/inventory-item.dto';
 import { InventoryItem } from '../../database/models/inventory-item.entity';
-import { BadRequestException } from '~pkg/exceptions/BadRequestException';
+import { BadRequestException } from '@denlay/core/exceptions/BadRequestException';
 import { createItems, deleteItem, getInventory, placeItem } from './service';
 import { createItemsSchema, deleteItemSchema, getInventorySchema, placeItemSchema } from './schemas';
 

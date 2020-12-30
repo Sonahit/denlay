@@ -1,4 +1,4 @@
-import { Container } from '~pkg/core/Container';
+import { Container } from '@denlay/core/core/Container';
 import cote from 'cote';
 import { JwtService } from 'services/jwt.service';
 
