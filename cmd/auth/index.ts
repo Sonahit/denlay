@@ -6,7 +6,7 @@ dotenv.config({ path: join(__dirname, '../../.env') });
 
 const port = process.env.PORT || 3001;
 async function boot() {
-  const addr = await app.listen(port);
+  const addr = await app.listen(port, '0.0.0.0');
 
   console.log(`Documentation at ${addr}/docs`);
 }

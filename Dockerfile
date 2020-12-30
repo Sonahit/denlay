@@ -12,4 +12,6 @@ COPY . .
 
 RUN yarn pkg:install
 
+EXPOSE 3000 3001
+
 CMD [ "yarn", "start" ]
