@@ -1,5 +1,6 @@
 import { HttpSchemas } from '~pkg/schemas/http/http-schemas.enum';
 import { FastifySchema } from 'fastify';
+import { JSonSCHEMA7 } from 'json-schema';
 
 export const authSchema: FastifySchema = {
   description: 'Авторизация',
@@ -16,11 +17,11 @@ export const authSchema: FastifySchema = {
         minLength: 1,
       },
     },
-  },
+  } as JSonSCHEMA7,
   response: {
     '2xx': {
       $ref: HttpSchemas.JWT,
-    },
+    } as JSonSCHEMA7,
   },
 };
 

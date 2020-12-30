@@ -1,17 +1,18 @@
 import { FastifySchema } from 'fastify';
+import { JSONSchema7 } from 'json-schema';
 
 export const getInventorySchema: FastifySchema = {
   summary: 'Получить инвентарь юзера',
   response: {
-    // 200: {
-    //   type: 'object',
-    //   properties: {
-    //     data: {
-    //       $ref: '#/definitions/Inv',
-    //     },
-    //   },
-    // },
-  },
+    '2xx': {
+      type: 'object',
+      properties: {
+        data: {
+          $ref: '#/definitions/Inv',
+        },
+      },
+    },
+  } as JSONSchema7,
   security: [
     {
       apiKey: [],

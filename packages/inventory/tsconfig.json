@@ -1,14 +1,13 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "typeRoots": ["augmentation.d.ts", "node_modules/@types"],
     "baseUrl": "./",
   },
+  "include": ["./**/*.ts"],
   "ts-node": {
     "files": true,
   },
   "files": [
-    "./app.ts",
     "./augmentation.d.ts"
   ]
 }

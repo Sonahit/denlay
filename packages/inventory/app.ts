@@ -9,6 +9,7 @@ import routes from './routes';
 import errorHandler from '~pkg/plugins/error-handler';
 import payloadHandler from '~pkg/plugins/payload-handler';
 import checkAuth from './internal/utils/checkAuth';
+import { JSONSchema7 } from 'json-schema';
 
 const fastify = _fastify({
   ignoreTrailingSlash: true,
@@ -26,7 +27,7 @@ fastify
   .register(errorHandler)
   .register(plgEnv)
   .register(cors)
-  .register(fastifySwagger, {
+  .register(fastifySwagger as any, {
     routePrefix: '/docs',
     exposeRoute: true,
     swagger: {
@@ -39,7 +40,7 @@ fastify
             cells: { type: 'number' },
             items: { type: 'array', items: { $ref: '#/definitions/InvItem' } },
           },
-        },
+        } as JSONSchema7,
         InvItem: {
           type: 'object',
           required: ['name'],
@@ -50,7 +51,7 @@ fastify
             cell: { type: 'number' },
             inventoryId: { type: 'number' },
           },
-        },
+        } as JSONSchema7,
       },
       securityDefinitions: {
         apiKey: {
