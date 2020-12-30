@@ -9,6 +9,8 @@
     "lerna": "^3.22.1"
   },
   "scripts": {
+    "postinstall": "yarn pkg:install",
+    "pkg:install": "lerna bootstrap",
     "start": "lerna run start --stream",
     "sync": "lerna run typeorm:sync --stream",
     "typeorm": "ts-node -P ./tsconfig.base.json ./node_modules/typeorm/cli.js"

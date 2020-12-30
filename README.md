@@ -16,20 +16,26 @@ node >= 12.x
 
 Перед запуском необходимо создать файлы в сервисах
 
-Сервис авторизации находится в `internal/app/auth`
+Сервис авторизации находится в `packages/auth`
 
-Сервис инвентаря находится в `internal/app/inventory`
+Сервис инвентаря находится в `packages/inventory`
 
-В каждом из сервисом создать файлы `.env` и `ormconfig.js` по их примерам с постфиксом `.example`
+В каждом из сервисом создать файлы `ormconfig.ts` по их примерам с постфиксом `.example`
+
+### Сервисы приложения
+
+```bash
+npm run start
+```
 
 ### Сервис авторизации
 
 ```bash
-cd ./internal/app/auth && npm start
+cd ./packages/auth && npm start
 ```
 
 ### Сервис Инвентаря
 
 ```bash
-cd ./internal/app/inventory && npm start
+cd ./packages/inventory && npm start
 ```
