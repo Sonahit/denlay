@@ -1,11 +1,12 @@
 {
-  "name": "pkg",
+  "name": "denlay-core",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "auth": "^0.0.9",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "cote": "^1.0.0",

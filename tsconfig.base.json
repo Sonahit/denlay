@@ -18,8 +18,7 @@
     "baseUrl": "./",
     "types": ["node", "jest"],
     "paths": {
-      "@pkg": ["internal/pkg"],
-      "@app": ["internal/app"]
+      "@pkg": ["packages/core"]
     }
   }
 }

@@ -3,9 +3,10 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 import { ForbiddenException } from '~pkg/exceptions/ForbiddenException';
 import { UnauthorizedException } from '~pkg/exceptions/UnauthorizedException';
 import { getConnection, getRepository } from 'typeorm';
-import { User } from 'database/models/user.entity';
+import { User } from '../database/models/user.entity';
 import { BadRequestException } from '~pkg/exceptions/BadRequestException';
 import { UserDto } from '~pkg/dto/user.dto';
+import userMapper from 'mappers/user.mapper';
 
 export class JwtService {
   constructor(private fastifyInstance: FastifyInstance) {}
@@ -36,7 +37,7 @@ export class JwtService {
     if (isBlacklisted) {
       return true;
     }
-    return (await getRepository(User).findOneOrFail({ where: { id } })).toDto();
+    return userMapper.toDto(await getRepository(User).findOneOrFail({ where: { id } }));
   };
 
   verifyJwt = async (request: FastifyRequest) => {

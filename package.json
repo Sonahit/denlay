@@ -1,0 +1,19 @@
+{
+  "name": "denlay",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Sonahit/denlay.git",
+  "author": "Ivan Sadykov <grandpajok@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
+  "scripts": {
+    "start": "lerna run start --stream",
+    "sync": "lerna run typeorm:sync",
+    "typeorm": "ts-node -P ./tsconfig.base.json ./node_modules/typeorm/cli.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}

@@ -1,8 +1,8 @@
 import { BaseEntity } from '~pkg/types';
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { InventoryDto } from '../dto/inventory.dto';
-import { User } from './user.entity';
+import { User } from '~pkg/database/models/user.entity';
 import { InventoryItem } from './inventory-item.entity';
+import { InventoryDto } from '../dto/inventory.dto';
 
 @Entity()
 export class Inventory implements BaseEntity<InventoryDto> {
@@ -17,7 +17,7 @@ export class Inventory implements BaseEntity<InventoryDto> {
   })
   cells!: number;
 
-  @OneToOne(() => User, (u) => u.inventory, {
+  @OneToOne(() => User, {
     lazy: true,
     persistence: false,
   })
