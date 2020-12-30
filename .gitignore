@@ -35,7 +35,7 @@ lerna-debug.log*
 
 #ENV
 .env
-ormconfig.js
+ormconfig.[tj]s
 
 #eslint output
 result.txt
