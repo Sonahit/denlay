@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "yarn ts-node -r tsconfig-paths/register -P ./tsconfig.json ../../cmd/auth/index",
-    "typeorm:sync": "ts-node -P ./tsconfig.json ./node_modules/typeorm/cli.js schema:sync",
+    "typeorm:sync": "ts-node -P ./tsconfig.json ../../node_modules/typeorm/cli.js schema:sync",
     "test": "yarn jest --detectOpenHandles"
   },
   "devDependencies": {
