@@ -7,3 +7,24 @@ services:
       POSTGRES_DB: postgres
     ports:
       - 6666:5432
+    networks:
+      - internal
+  backend:
+    depends_on:
+      - postgres
+    build:
+      dockerfile: 'Dockerfile'
+      context: .
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+    networks:
+      - internal
+    ports:
+      - 3050:3000
+networks:
+  internal:
+    ipam:
+      driver: default
+      config:
+        - subnet: '10.0.5.0/24'

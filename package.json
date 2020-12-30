@@ -6,9 +6,6 @@
   "repository": "https://github.com/Sonahit/denlay.git",
   "author": "Ivan Sadykov <grandpajok@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "lerna": "^3.22.1"
-  },
   "npmClient": "yarn",
   "engines": {
     "node": ">=15.0.0",
@@ -18,13 +15,13 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "yarn pkg:install",
     "pkg:install": "lerna bootstrap",
     "start": "lerna run start --stream",
     "sync": "lerna run typeorm:sync --stream",
     "typeorm": "ts-node -P ./tsconfig.base.json ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
+    "lerna": "^3.22.1",
     "dotenv": "^8.2.0"
   }
 }
