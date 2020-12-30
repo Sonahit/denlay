@@ -9,6 +9,11 @@
   "devDependencies": {
     "lerna": "^3.22.1"
   },
+  "npmClient": "yarn",
+  "engines": {
+    "node": ">=15.0.0",
+    "yarn": ">=1.0.0"
+  },
   "workspaces": [
     "packages/*"
   ],
