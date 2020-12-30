@@ -5,7 +5,7 @@ import { UnauthorizedException } from '~pkg/exceptions/UnauthorizedException';
 import { getConnection, getRepository } from 'typeorm';
 import { User } from '../database/models/user.entity';
 import { BadRequestException } from '~pkg/exceptions/BadRequestException';
-import { UserDto } from '~pkg/dto/user.dto';
+import { UserDto } from '../database/dto/user.dto';
 import userMapper from 'mappers/user.mapper';
 
 export class JwtService {
