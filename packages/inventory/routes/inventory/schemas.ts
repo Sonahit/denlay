@@ -8,11 +8,16 @@ export const getInventorySchema: FastifySchema = {
       type: 'object',
       properties: {
         data: {
-          $ref: '#/definitions/Inv',
+          type: 'object',
+          allOf: [
+            {
+              $ref: '#/definitions/Inv',
+            },
+          ],
         },
       },
-    },
-  } as JSONSchema7,
+    } as JSONSchema7,
+  },
   security: [
     {
       apiKey: [],
