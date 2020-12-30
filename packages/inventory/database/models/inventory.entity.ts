@@ -1,6 +1,6 @@
 import { BaseEntity } from '~pkg/types';
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from '~pkg/database/models/user.entity';
+import { User } from './user.entity';
 import { InventoryItem } from './inventory-item.entity';
 import { InventoryDto } from '../dto/inventory.dto';
 

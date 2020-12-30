@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "lerna run start --stream",
-    "sync": "lerna run typeorm:sync",
+    "sync": "lerna run typeorm:sync --stream",
     "typeorm": "ts-node -P ./tsconfig.base.json ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
