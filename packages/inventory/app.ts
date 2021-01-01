@@ -85,6 +85,11 @@ fastify
       username: String(process.env.DB_USERNAME),
       password: String(process.env.DB_PASSWORD),
       database: String(process.env.DB_DATABASE),
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      cli: {
+        migrationsDir: __dirname + '/**/database/migrations',
+      },
+      synchronize: true,
     }).then(() => fastify.log.info('Connected to db'));
   });
 
