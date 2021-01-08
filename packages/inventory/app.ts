@@ -44,28 +44,6 @@ fastify
     routePrefix: '/docs',
     exposeRoute: true,
     swagger: {
-      definitions: {
-        Inv: {
-          type: 'object',
-          properties: {
-            id: { type: 'number' },
-            userId: { type: 'number' },
-            cells: { type: 'number' },
-            items: { type: 'array', items: { $ref: '#/definitions/InvItem' } },
-          },
-        } as JSONSchema7,
-        InvItem: {
-          type: 'object',
-          required: ['name'],
-          properties: {
-            name: { type: 'string' },
-            description: { type: 'string' },
-            count: { type: 'number' },
-            cell: { type: 'number' },
-            inventoryId: { type: 'number' },
-          },
-        } as JSONSchema7,
-      },
       securityDefinitions: {
         apiKey: {
           type: 'apiKey',

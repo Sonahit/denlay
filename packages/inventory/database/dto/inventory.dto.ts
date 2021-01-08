@@ -8,5 +8,5 @@ export class InventoryDto implements Inventory {
 
   cells!: number;
 
-  invItems!: InventoryItemDto[];
+  items!: InventoryItemDto[];
 }

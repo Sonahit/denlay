@@ -1,6 +1,32 @@
 import { FastifySchema } from 'fastify';
 import { JSONSchema7 } from 'json-schema';
 
+export const definitions = [
+  {
+    $id: 'Inv',
+    type: 'object',
+    properties: {
+      id: { type: 'number' },
+      userId: { type: 'number' },
+      cells: { type: 'number' },
+      items: { type: 'array', items: { $ref: 'InvItem#' } },
+    },
+  } as JSONSchema7,
+  {
+    $id: 'InvItem',
+    type: 'object',
+    required: ['name'],
+    properties: {
+      id: { type: 'number' },
+      name: { type: 'string' },
+      description: { type: 'string' },
+      count: { type: 'number' },
+      cell: { type: 'number' },
+      inventoryId: { type: 'number' },
+    },
+  } as JSONSchema7,
+];
+
 export const getInventorySchema: FastifySchema = {
   summary: 'Получить инвентарь юзера',
   response: {
@@ -9,11 +35,7 @@ export const getInventorySchema: FastifySchema = {
       properties: {
         data: {
           type: 'object',
-          allOf: [
-            {
-              $ref: '#/definitions/Inv',
-            },
-          ],
+          $ref: 'Inv#',
         },
       },
     } as JSONSchema7,
@@ -30,22 +52,22 @@ export const createItemsSchema: FastifySchema = {
   body: {
     type: 'array',
     items: {
-      $ref: '#/definitions/InvItem',
+      $ref: 'InvItem#',
     },
-  },
+  } as JSONSchema7,
   response: {
-    200: {
+    '2xx': {
       type: 'object',
       properties: {
         data: {
           type: 'array',
           items: {
             type: 'object',
-            $ref: '#/definitions/InvItem',
+            $ref: 'InvItem#',
           },
         },
       },
-    },
+    } as JSONSchema7,
   },
   security: [
     {
@@ -63,7 +85,7 @@ export const placeItemSchema: FastifySchema = {
     },
   },
   response: {
-    200: {
+    '2xx': {
       type: 'object',
       properties: {
         oneOf: [
@@ -72,7 +94,7 @@ export const placeItemSchema: FastifySchema = {
             properties: {
               data: {
                 type: 'object',
-                $ref: '#/definitions/InvItem',
+                $ref: 'InvItem#',
               },
             },
           },
@@ -83,14 +105,14 @@ export const placeItemSchema: FastifySchema = {
                 type: 'array',
                 items: {
                   type: 'object',
-                  $ref: '#/definitions/InvItem',
+                  $ref: 'InvItem#',
                 },
               },
             },
           },
         ],
       },
-    },
+    } as JSONSchema7,
   },
   params: {
     type: 'object',

@@ -9,34 +9,36 @@ import { InventoryItemDto } from '../../database/dto/inventory-item.dto';
 import { InventoryItem } from '../../database/models/inventory-item.entity';
 import { BadRequestException } from '@denlay/core/exceptions/BadRequestException';
 import { createItems, deleteItem, getInventory, placeItem } from './service';
-import { createItemsSchema, deleteItemSchema, getInventorySchema, placeItemSchema } from './schemas';
+import { createItemsSchema, definitions, deleteItemSchema, getInventorySchema, placeItemSchema } from './schemas';
+import fp from 'fastify-plugin';
+import { User } from 'database/models/user.entity';
+import { Response } from '@denlay/core/interfaces/Response';
 
-export default (fastify: FastifyInstance) => {
-  return fastify
-    .get(
-      '/inventory',
-      {
-        schema: getInventorySchema,
-        preValidation: [(fastify as any).authenticate],
-      },
-      async (req): Promise<InventoryDto> => {
-        if (req.user) {
-          return await (await getInventory(req.user)).toDto();
-        }
-        throw new UnauthorizedException();
-      }
-    )
+export default fp((f: FastifyInstance, _: any, done: (err?: Error) => void) => {
+  definitions.map((e) => f.addSchema(e));
+  f.get(
+    '/inventory',
+    {
+      schema: getInventorySchema,
+      preValidation: [(f as any).authenticate],
+    },
+    async (req): Promise<Partial<Response<InventoryDto>>> => {
+      return {
+        data: await (await getInventory(req.user as User)).toDto(),
+      };
+    }
+  )
     .post(
       '/inventory',
       {
         schema: createItemsSchema,
-        preValidation: [(fastify as any).authenticate],
+        preValidation: [(f as any).authenticate],
       },
       async (req): Promise<InventoryItemDto[]> => {
         const body = req.body as InventoryItemPostDto[];
         if (req.user) {
           const inventory = await getInventory(req.user);
-          return (await createItems(inventory, body)).map((i) => i.toDto());
+          return (await createItems(inventory, body)).map((i) => i?.toDto());
         }
         throw new UnauthorizedException();
       }
@@ -45,7 +47,7 @@ export default (fastify: FastifyInstance) => {
       '/inventory/:itemId',
       {
         schema: placeItemSchema,
-        preValidation: [(fastify as any).authenticate],
+        preValidation: [(f as any).authenticate],
       },
       async (req): Promise<InventoryItemDto | InventoryItemDto[]> => {
         const body = {
@@ -55,7 +57,7 @@ export default (fastify: FastifyInstance) => {
         if (req.user) {
           const inventory = await getInventory(req.user);
           const result = await placeItem(inventory, body);
-          return Array.isArray(result) ? result.map((r) => r.toDto()) : result.toDto();
+          return Array.isArray(result) ? result.map((r) => r?.toDto()) : result?.toDto();
         }
         throw new UnauthorizedException();
       }
@@ -64,7 +66,7 @@ export default (fastify: FastifyInstance) => {
       '/inventory/:itemId',
       {
         schema: deleteItemSchema,
-        preValidation: [(fastify as any).authenticate],
+        preValidation: [(f as any).authenticate],
       },
       async (req): Promise<MessageResponse> => {
         if (req.user) {
@@ -81,4 +83,5 @@ export default (fastify: FastifyInstance) => {
         throw new UnauthorizedException();
       }
     );
-};
+  done();
+});

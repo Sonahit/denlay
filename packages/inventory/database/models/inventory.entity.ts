@@ -35,7 +35,7 @@ export class Inventory implements BaseEntity<InventoryDto> {
       id: this.id,
       cells: this.cells,
       userId: this.userId,
-      invItems: items.length ? items.map((i) => i.toDto()) : [],
+      items: items.length ? await Promise.all(items.map((i) => i.toDto())) : [],
     };
   }
 }
