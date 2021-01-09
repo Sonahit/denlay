@@ -19,7 +19,7 @@ export default fp((f: FastifyInstance, _: any, done: (err?: Error) => void) => {
   f.get(
     '/inventory',
     {
-      schema: getInventorySchema,
+      // schema: getInventorySchema,
       preValidation: [(f as any).authenticate],
     },
     async (req): Promise<Partial<Response<InventoryDto>>> => {
@@ -31,7 +31,7 @@ export default fp((f: FastifyInstance, _: any, done: (err?: Error) => void) => {
     .post(
       '/inventory',
       {
-        schema: createItemsSchema,
+        // schema: createItemsSchema,
         preValidation: [(f as any).authenticate],
       },
       async (req): Promise<InventoryItemDto[]> => {
@@ -46,7 +46,7 @@ export default fp((f: FastifyInstance, _: any, done: (err?: Error) => void) => {
     .post(
       '/inventory/:itemId',
       {
-        schema: placeItemSchema,
+        // schema: placeItemSchema,
         preValidation: [(f as any).authenticate],
       },
       async (req): Promise<InventoryItemDto | InventoryItemDto[]> => {
@@ -65,7 +65,7 @@ export default fp((f: FastifyInstance, _: any, done: (err?: Error) => void) => {
     .delete(
       '/inventory/:itemId',
       {
-        schema: deleteItemSchema,
+        // schema: deleteItemSchema,
         preValidation: [(f as any).authenticate],
       },
       async (req): Promise<MessageResponse> => {

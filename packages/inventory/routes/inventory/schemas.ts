@@ -29,6 +29,14 @@ export const definitions = [
 
 export const getInventorySchema: FastifySchema = {
   summary: 'Получить инвентарь юзера',
+  headers: {
+    type: 'object',
+    properties: {
+      authorization: {
+        type: 'string',
+      },
+    },
+  } as JSONSchema7,
   response: {
     '2xx': {
       type: 'object',
@@ -49,6 +57,14 @@ export const getInventorySchema: FastifySchema = {
 
 export const createItemsSchema: FastifySchema = {
   summary: 'Создать вещи',
+  headers: {
+    type: 'object',
+    properties: {
+      authorization: {
+        type: 'string',
+      },
+    },
+  } as JSONSchema7,
   body: {
     type: 'array',
     items: {
@@ -78,6 +94,14 @@ export const createItemsSchema: FastifySchema = {
 
 export const placeItemSchema: FastifySchema = {
   summary: 'Переместить вещи',
+  headers: {
+    type: 'object',
+    properties: {
+      authorization: {
+        type: 'string',
+      },
+    },
+  } as JSONSchema7,
   body: {
     type: 'object',
     properties: {
@@ -87,30 +111,63 @@ export const placeItemSchema: FastifySchema = {
   response: {
     '2xx': {
       type: 'object',
-      properties: {
-        oneOf: [
-          {
-            type: 'object',
-            properties: {
-              data: {
+      oneOf: [
+        {
+          type: 'object',
+          properties: {
+            data: {
+              type: 'object',
+              $ref: 'InvItem#',
+            },
+          },
+        },
+        {
+          type: 'object',
+          properties: {
+            data: {
+              type: 'array',
+              items: {
                 type: 'object',
                 $ref: 'InvItem#',
               },
             },
           },
-          {
-            type: 'object',
-            properties: {
-              data: {
-                type: 'array',
-                items: {
-                  type: 'object',
-                  $ref: 'InvItem#',
-                },
-              },
-            },
-          },
-        ],
+        },
+      ],
+    } as JSONSchema7,
+  },
+  params: {
+    type: 'object',
+    properties: {
+      itemId: {
+        type: 'number',
+      },
+    },
+  } as JSONSchema7,
+  security: [
+    {
+      apiKey: [],
+    },
+  ],
+};
+
+export const deleteItemSchema: FastifySchema = {
+  summary: 'Удалить вещь',
+  headers: {
+    type: 'object',
+    properties: {
+      authorization: {
+        type: 'string',
+      },
+    },
+  } as JSONSchema7,
+  response: {
+    '2xx': {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string',
+        },
       },
     } as JSONSchema7,
   },
@@ -121,24 +178,7 @@ export const placeItemSchema: FastifySchema = {
         type: 'number',
       },
     },
-  },
-  security: [
-    {
-      apiKey: [],
-    },
-  ],
-};
-
-export const deleteItemSchema: FastifySchema = {
-  summary: 'Удалить вещь',
-  params: {
-    type: 'object',
-    properties: {
-      itemId: {
-        type: 'number',
-      },
-    },
-  },
+  } as JSONSchema7,
   security: [
     {
       apiKey: [],

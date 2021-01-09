@@ -9,7 +9,6 @@ import routes from './routes';
 import errorHandler from '@denlay/core/plugins/error-handler';
 import payloadHandler from '@denlay/core/plugins/payload-handler';
 import checkAuth from './internal/utils/checkAuth';
-import { JSONSchema7 } from 'json-schema';
 import { User } from 'database/models/user.entity';
 declare module 'fastify' {
   export interface FastifyInstance {
@@ -36,10 +35,10 @@ const fastify = _fastify({
 });
 
 fastify
+  .register(cors)
+  .register(plgEnv)
   .register(payloadHandler)
   .register(errorHandler)
-  .register(plgEnv)
-  .register(cors)
   .register(fastifySwagger as any, {
     routePrefix: '/docs',
     exposeRoute: true,
@@ -54,6 +53,7 @@ fastify
     },
   })
   .register(swagger)
+  .register(routes)
   .decorate('authenticate', checkAuth)
   .ready(() => {
     createConnection({
@@ -70,7 +70,5 @@ fastify
       synchronize: true,
     }).then(() => fastify.log.info('Connected to db'));
   });
-
-routes(fastify);
 
 export default fastify;
